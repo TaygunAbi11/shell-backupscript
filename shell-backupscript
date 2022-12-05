@@ -87,7 +87,11 @@ function unbackup(){
 
 function listbackup(){
 	echo "LISTBACKUP"
-# Eingeben des Backuppfades
+}
+
+function deletebackup(){
+	echo "DELETEBACKUP"
+	# Eingeben des Backuppfades
 function where2Backup(){
 	clear
 	echo "|----------------------------------------------|"
@@ -95,6 +99,7 @@ function where2Backup(){
 	echo "|                                              |"
 	read -p "| Eingabe: " WHERE2BACKUP 
 }
+
 # Eingeben des Pfades, der gesichert werden soll
 function what2Backup(){
 	clear
@@ -104,9 +109,40 @@ function what2Backup(){
 	read -p "| Eingabe: " WHAT2BACKUP 
 }
 
-function deletebackup(){
-	echo "DELETEBACKUP"
+
+function backup(){
+	BACKUPFILE=$(date +%Y%m%d-%H%M%S)-backup.tgz
+	YESNO=0
+	until [ $YESNO = 1 ]
+	do
+		compress
+		echo "| Sind Sie sicher das Sie die Option ${COMPRESS}         |" 
+		echo "| benutzen möchten?                            |"
+		read -p "| (0: nein | 1: ja) " YESNO
+	done
+	# 
+	YESNO=0
+	until [ $YESNO = 1 ]
+	do
+		where2Backup
+		echo "| Sind Sie sicher das Sie hier in speichern möchten: ${WHERE2BACKUP}         |" 
+		echo "| benutzen möchten?                            |"
+		read -p "| (0: nein | 1: ja) " YESNO
+	done
+	#
+	YESNO=0
+	until [ $YESNO = 1 ]
+	do
+		what2Backup	
+		echo "| Sind Sie sicher das Sie dieses Verzeichnis sichern wollen? ${WHAT2BACKUP}         |" 
+		echo "| benutzen möchten?                            |"
+		read -p "| (0: nein | 1: ja) " YESNO
+	done
+		
+	tar cf${COMPRESS} ${WHERE2BACKUP}/$BACKUPFILE ${WHAT2BACKUP}
+	sleep 2
 }
+
 
 # Hauptereignisschleife
 while :
