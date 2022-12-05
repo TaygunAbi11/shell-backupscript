@@ -87,6 +87,21 @@ function unbackup(){
 
 function listbackup(){
 	echo "LISTBACKUP"
+# Eingeben des Backuppfades
+function where2Backup(){
+	clear
+	echo "|----------------------------------------------|"
+	echo "| Wohin soll das Backup gespeichert werden:    |"
+	echo "|                                              |"
+	read -p "| Eingabe: " WHERE2BACKUP 
+}
+# Eingeben des Pfades, der gesichert werden soll
+function what2Backup(){
+	clear
+	echo "|----------------------------------------------|"
+	echo "| Wohin soll das Backup gespeichert werden:    |"
+	echo "|                                              |"
+	read -p "| Eingabe: " WHAT2BACKUP 
 }
 
 function deletebackup(){
